@@ -10,7 +10,7 @@ from CheckRepoAndCommits import check_repo_and_commits
 
 class CheckRepoAndCommitsTest(unittest.TestCase):
     def test_check_repo_and_commits(self):
-        expected = {'ssw555tmHogwarts2020Spring': 3, 'Triangle567': 9, 'GitHubApi567': 16}
+        expected = {'ssw555tmHogwarts2020Spring': 2, 'Triangle567': 2, 'GitHubApi567': 16}
         self.assertEqual(check_repo_and_commits('yhu71'), expected)
 
 
