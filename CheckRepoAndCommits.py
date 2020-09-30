@@ -28,4 +28,4 @@ def check_repo_and_commits(github_user_id):
 
 
 if __name__ == '__main__':
-    check_repo_and_commits('yhu71')
+    check_repo_and_commits('richkempinski')
