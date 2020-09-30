@@ -20,21 +20,23 @@ def check_repo_and_commits(github_user_id):
 
     # Retrieving the commits of a repository:
     for repo in parsed_user_repos:
+        if "name" in repo:
+            repo_name = repo["name"]
 
-        repo_name = repo["name"]
+            try:
+                repo_commits = requests.get(f'https://api.github.com/repos/{github_user_id}/{repo_name}/commits')
+            except requests.exceptions.RequestException as e:
+                raise SystemExit(e)
 
-        try:
-            repo_commits = requests.get(f'https://api.github.com/repos/{github_user_id}/{repo_name}/commits')
-        except requests.exceptions.RequestException as e:
-            raise SystemExit(e)
+            repo_commit = json.loads(repo_commits.text)
 
-        repo_commit = json.loads(repo_commits.text)
-
-        repository[repo_name] = len(repo_commit)
-        print(f'Repo: {repo_name} Number of commits: {len(repo_commit)}')
+            repository[repo_name] = len(repo_commit)
+            print(f'Repo: {repo_name} Number of commits: {len(repo_commit)}')
+        else:
+            raise SystemExit("Invalid input!")
 
     return repository
 
 
 if __name__ == '__main__':
-    check_repo_and_commits('richkempinski')
+    check_repo_and_commits('!!!!')
