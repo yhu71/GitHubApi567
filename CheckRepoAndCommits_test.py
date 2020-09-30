@@ -3,8 +3,6 @@ Author: Ying Hu
 This is for Homework 04a - Develop with the Perspective of the Tester in mind
 """
 import unittest
-import requests
-import json
 from CheckRepoAndCommits import check_repo_and_commits
 
 
