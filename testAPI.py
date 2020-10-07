@@ -1,3 +1,7 @@
+"""
+Author: Ying Hu
+This is for Homework 05a - Isolate External Dependencies
+"""
 import os
 import unittest
 from unittest.mock import Mock, patch
