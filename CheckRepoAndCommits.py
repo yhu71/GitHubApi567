@@ -11,15 +11,12 @@ def check_repo_and_commits(github_user_id):
     # Use a dictionary to store the result, key = repo name, value = number of commits
     repository = {}
     # Retrieving a user's repositories:
-    try:
-        user_repos = requests.get(f'https://api.github.com/users/{github_user_id}/repos')
-    except requests.exceptions.RequestException as e:
-        raise SystemExit(e)
-
+    user_repos = requests.get(f'https://api.github.com/users/{github_user_id}/repos')
     parsed_user_repos = json.loads(user_repos.text)
 
     # Retrieving the commits of a repository:
     for repo in parsed_user_repos:
+
         if "name" in repo:
             repo_name = repo["name"]
 
@@ -34,6 +31,15 @@ def check_repo_and_commits(github_user_id):
             print(f'Repo: {repo_name} Number of commits: {len(repo_commit)}')
         else:
             raise SystemExit("Invalid input!")
+
+        repo_name = repo["name"]
+
+        repo_commits = requests.get(f'https://api.github.com/repos/{github_user_id}/{repo_name}/commits')
+        repo_commit = json.loads(repo_commits.text)
+
+        repository[repo_name] = len(repo_commit)
+        print(f'Repo: {repo_name} Number of commits: {len(repo_commit)}')
+
 
     return repository
 
